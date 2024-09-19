@@ -63,6 +63,9 @@ vim.opt.scrolloff = 10
 
 vim.opt.tabstop = 8
 
+-- To paste without inserting unned comment symbols 
+vim.opt.formatoptions:remove('ro')
+
 ---
 -- KEY MAPS ---
 ---
@@ -110,6 +113,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
+-- Setting formatoptions for every opened buffer (avoids pasting unneded comments)
+vim.cmd([[autocmd BufEnter * set formatoptions-=ro]])
 
 -- Using Lazy.Nvim plugin manager
 require("bootstrap.lazy")
