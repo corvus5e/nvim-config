@@ -7,9 +7,9 @@
 -- VIM OPTs ---
 ---
 
-vim.opt.shell = '"C:/Program Files/Git/bin/bash.exe"' 
-vim.opt.shellcmdflag = '-c'
-vim.opt.shellquote = "\""
+-- vim.opt.shell = '"C:/Program Files/Git/bin/bash.exe"' 
+-- vim.opt.shellcmdflag = '-c'
+-- vim.opt.shellquote = "\""
 
 -- Make sure to setup `mapleader` and `maplocalleader` before
 -- loading lazy.nvim so that mappings are correct.
@@ -21,7 +21,9 @@ vim.g.maplocalleader = " "
 vim.g.have_nerd_font = true
 
 --- Turn relative number option on
-vim.opt.rnu = true
+vim.opt.number = true
+vim.opt.relativenumber = true
+
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
