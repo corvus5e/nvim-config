@@ -87,6 +87,9 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
+--- Keymap to open terminal in bottom split
+vim.keymap.set('n', '<C-t>', '<cmd>:sp<CR><BAR><cmd>:term<CR>')
+
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
 --  See `:help wincmd` for a list of all window commands
@@ -101,6 +104,12 @@ vim.keymap.set('n', '<C-Down>', '<cmd>resize -1<CR>')
 vim.keymap.set('n', '<C-Right>', '<cmd>vertical resize +1<CR>')
 vim.keymap.set('n', '<C-Left>', '<cmd>vertical resize -1<CR>')
 
+--- Keymaps to open terminal
+vim.keymap.set('n', '<C-n>', '<cmd>:Lexplore<CR><BAR><cmd>:vertical resize 35<CR>')
+
+--- Keymaps for tabs switching 
+vim.keymap.set('n', '<Tab>', '<cmd>:tabn<CR>')
+vim.keymap.set('n', '<S-Tab>', '<cmd>:tabp<CR>')
 ---
 --- AUTOCOMMANDS ---
 ---
