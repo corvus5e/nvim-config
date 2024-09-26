@@ -63,7 +63,8 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
-vim.opt.tabstop = 8
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 
 -- To paste without inserting unned comment symbols 
 vim.opt.formatoptions:remove('ro')
