@@ -109,8 +109,8 @@ vim.keymap.set('n', '<C-Left>', '<cmd>vertical resize -1<CR>')
 vim.keymap.set('n', '<C-n>', '<cmd>:Lexplore<CR><BAR><cmd>:vertical resize 35<CR>')
 
 --- Keymaps for open buffers switching 
-vim.keymap.set('n', '<Tab>', '<cmd>:bnext<CR>')
-vim.keymap.set('n', '<S-Tab>', '<cmd>:bprevious<CR>')
+vim.keymap.set('n', '<Tab>', '<cmd>:tabnext<CR>')
+vim.keymap.set('n', '<S-Tab>', '<cmd>:tabprevious<CR>')
 
 --- Keymap to enable spell check for currently opened buffer:
 --- TODO: Make a toggle to turn on opening a buffer if turned on and disable on 
