@@ -63,8 +63,8 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
+vim.opt.tabstop = 8
+vim.opt.shiftwidth = 8
 
 -- To paste without inserting unned comment symbols 
 vim.opt.formatoptions:remove('ro')
@@ -89,7 +89,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 --- Keymap to open terminal in bottom split
-vim.keymap.set('n', '<C-t>', '<cmd>:sp<CR><BAR><cmd>:term<CR>')
+vim.keymap.set('n', '<C-t>', '<cmd>:tabnew<CR><BAR><cmd>:term<CR>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
