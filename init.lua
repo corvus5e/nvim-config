@@ -1,128 +1,53 @@
----
---- This is sandbox replica of https://github.com/nvim-lua/kickstart.nvim
---- Just tinkering with nvim 
----
-
----
--- VIM OPTs ---
----
-
--- vim.opt.shell = '"C:/Program Files/Git/bin/bash.exe"' 
--- vim.opt.shellcmdflag = '-c'
--- vim.opt.shellquote = "\""
-
--- Make sure to setup `mapleader` and `maplocalleader` before
--- loading lazy.nvim so that mappings are correct.
--- This is also a good place to setup other settings (vim.opt)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
+vim.opt.termguicolors = true
 
---- Turn relative number option on
-vim.opt.number = true
-vim.opt.relativenumber = true
+vim.opt.ruler = false -- show position of cursor
+vim.opt.laststatus = 0 -- status line, 0 - don't show 
+vim.opt.sidescrolloff = 10 -- keep 10 lines at left/right when scrolling
+vim.opt.scrolloff = 10 -- keep 10 lines at top/bottom when scrolling
+vim.opt.wrap = false -- do not wrap long lines
 
-
--- Enable mouse mode, can be useful for resizing splits for example!
-vim.opt.mouse = 'a'
-
--- Enable break indent
-vim.opt.breakindent = true
-
--- Do now wrap lines
-vim.opt.wrap = false
-
--- Save undo history
-vim.opt.undofile = true
-
--- Keep signcolumn on by default
-vim.opt.signcolumn = 'yes'
-
--- Decrease update time
-vim.opt.updatetime = 250
-
--- Decrease mapped sequence wait time
--- Displays which-key popup sooner
-vim.opt.timeoutlen = 300
-
--- Configure how new splits should be opened
-vim.opt.splitright = true
-vim.opt.splitbelow = true
-
--- Sets how neovim will display certain whitespace characters in the editor.
---  See `:help 'list'`
---  and `:help 'listchars'`
-vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-
--- Preview substitutions live, as you type!
-vim.opt.inccommand = 'split'
-
--- Show which line your cursor is on
-vim.opt.cursorline = true
-
--- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 10
+vim.opt.list = true -- show blanks
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' } -- show blanks as 
 
 vim.opt.tabstop = 8
 vim.opt.shiftwidth = 8
 
--- To paste without inserting unned comment symbols 
-vim.opt.formatoptions:remove('ro')
-
----
--- KEY MAPS ---
----
----
--- Clear highlights on search when pressing <Esc> in normal mode
---  See `:help hlsearch`
+-- Key mappings
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-
--- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
--- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
--- is not what someone will guess without a bit more experience.
---
--- OTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
+vim.keymap.set('n', '<C-n>', '<cmd>:Lexplore<CR>')
+vim.keymap.set('n', '<Tab>', '<cmd>:tabnext<CR>')
+vim.keymap.set('n', '<S-Tab>', '<cmd>:tabprevious<CR>')
+vim.keymap.set('n', '<C-t>', '<cmd>:tabnew<CR><BAR><cmd>:term<CR>')
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
---- Keymap to open terminal in bottom split
-vim.keymap.set('n', '<C-t>', '<cmd>:tabnew<CR><BAR><cmd>:term<CR>')
-
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---  See `:help wincmd` for a list of all window commands
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
---- Keymaps for resizing split views
-vim.keymap.set('n', '<C-Up>', '<cmd>resize +1<CR>')
-vim.keymap.set('n', '<C-Down>', '<cmd>resize -1<CR>')
-vim.keymap.set('n', '<C-Right>', '<cmd>vertical resize +1<CR>')
-vim.keymap.set('n', '<C-Left>', '<cmd>vertical resize -1<CR>')
-
---- Keymaps to open terminal
-vim.keymap.set('n', '<C-n>', '<cmd>:Lexplore<CR><BAR><cmd>:vertical resize 35<CR>')
-
---- Keymaps for open buffers switching 
-vim.keymap.set('n', '<Tab>', '<cmd>:tabnext<CR>')
-vim.keymap.set('n', '<S-Tab>', '<cmd>:tabprevious<CR>')
-
---- Keymap to enable spell check for currently opened buffer:
---- TODO: Make a toggle to turn on opening a buffer if turned on and disable on 
---- entering if toggle if off. Also probably need to sell not for all files
-vim.keymap.set('n', '<leader>ts', '<cmd>:setlocal spell spelllang=en_us<CR>', { desc = 'Enable spell check for current buffer' })
-
----
---- AUTOCOMMANDS ---
----
+-- LSP  key mappings
+vim.api.nvim_create_autocmd('LspAttach', {
+	group = vim.api.nvim_create_augroup('my.lsp', {}),
+	callback = function(args)
+		vim.keymap.set('i', '<C-Space>','<C-x><C-o>', { desc = 'Trigger completion' })
+		vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = '[C]ode [A]ction' })
+		vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, { desc = '[C]ode [F]ormat' })
+		vim.keymap.set('v', '<leader>cf', vim.lsp.buf.format, { desc = '[C]ode [F]ormat' })
+		vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = '[R]e[N]ame' })
+		vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostic list' })
+		vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float,{ desc = 'Open [d]iagnostic under cursor' })
+		vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = '[G]o to [D]eclaration' })
+		vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = '[G]o to [D]eclaration' })
+		vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = '[G]o to [I]mplementation' })
+		vim.keymap.set('n', 'gT', vim.lsp.buf.type_definition, { desc = '[G]o to [T]ype definition' })
+		vim.keymap.set('n', 'grr', vim.lsp.buf.references, { desc = '[G]o to [R]efe[R]ences' })
+		vim.keymap.set('n', 'K',  vim.lsp.buf.hover, { desc = '[G]o to [R]efe[R]ences' })
+	end
+})
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
@@ -135,9 +60,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- Setting formatoptions for every opened buffer (avoids pasting unneded comments)
-vim.cmd([[autocmd BufEnter * set formatoptions-=ro]])
+-- Load plugins
+require("config.lazy")
 
--- Using Lazy.Nvim plugin manager
-require("bootstrap.lazy")
+-- Do things after plugins are loaded
+vim.cmd.colorscheme("gruvbox-material")
+vim.lsp.enable('clangd')
+
 
