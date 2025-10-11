@@ -31,6 +31,9 @@ vim.opt.mouse = 'a'
 -- Enable break indent
 vim.opt.breakindent = true
 
+-- Do now wrap lines
+vim.opt.wrap = false
+
 -- Save undo history
 vim.opt.undofile = true
 

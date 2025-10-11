@@ -115,7 +115,10 @@ return {
         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
           winblend = 10,
           previewer = false,
+	  layout_strategy='bottom_pane',
+	  layout_config={height=0.99, width=1.0}
         })
+
       end, { desc = '[/] Fuzzily search in current buffer' })
 
       -- It's also possible to pass additional configuration options.
