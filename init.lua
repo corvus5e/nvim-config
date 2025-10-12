@@ -17,17 +17,18 @@ vim.opt.tabstop = 8
 vim.opt.shiftwidth = 8
 
 -- Key mappings
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-vim.keymap.set('n', '<C-n>', '<cmd>:Lexplore<CR>')
-vim.keymap.set('n', '<Tab>', '<cmd>:tabnext<CR>')
-vim.keymap.set('n', '<S-Tab>', '<cmd>:tabprevious<CR>')
-vim.keymap.set('n', '<C-t>', '<cmd>:tabnew<CR><BAR><cmd>:term<CR>')
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', {desc = 'stop highlight search results on <Esc>'})
+vim.keymap.set('n', '<C-n>', '<cmd>:Lexplore<CR>', {desc = 'open file explore as left split'})
+vim.keymap.set('n', '<Tab>', '<cmd>:tabnext<CR>', {desc = 'go to next tab'})
+vim.keymap.set('n', '<S-Tab>', '<cmd>:tabprevious<CR>', { desc = 'go to previous tab'})
+vim.keymap.set('n', '<C-t>', '<cmd>:tabnew<CR><BAR><cmd>:term<CR>', { desc = 'open terminal in new tab'})
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+vim.keymap.set('n', '<leader>ts', '<cmd>set spell! spelllang=en_us<CR>', {desc = 'Spell on/off'})
 
 -- LSP  key mappings
 vim.api.nvim_create_autocmd('LspAttach', {
