@@ -30,7 +30,7 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 vim.keymap.set('n', '<leader>ts', '<cmd>set spell! spelllang=en_us<CR>', {desc = 'Spell on/off'})
 
--- LSP  key mappings
+-- LSP key mappings
 vim.api.nvim_create_autocmd('LspAttach', {
 	group = vim.api.nvim_create_augroup('my.lsp', {}),
 	callback = function(args)
@@ -65,6 +65,5 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 require("config.lazy")
 
 -- Do things after plugins are loaded
-vim.cmd.colorscheme("gruvbox-material")
 vim.lsp.enable('clangd')
 
