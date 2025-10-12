@@ -53,6 +53,11 @@ return {
 		vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
 		vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
 		vim.keymap.set('n', '<leader>sm', builtin.marks, { desc = '[S]earch [M]arks' })
+
+		-- Shortcut for searching your Neovim configuration files
+		vim.keymap.set('n', '<leader>sn', function()
+			builtin.find_files { cwd = vim.fn.stdpath 'config' }
+		end, { desc = '[S]earch [N]eovim files' })
 	end
 },
 
