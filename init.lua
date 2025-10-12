@@ -61,11 +61,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- Load plugins
+-- Load Lazy plugins
 require("config.lazy")
 
 -- Do things after plugins are loaded
 vim.cmd.colorscheme("gruvbox-material")
 vim.lsp.enable('clangd')
-
 

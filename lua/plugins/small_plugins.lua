@@ -1,4 +1,5 @@
 return {
+	-- Gruvbox color scheme
 	{'sainnhe/gruvbox-material',
 	      lazy = false,
 	      priority = 1000,
@@ -11,11 +12,12 @@ return {
 	      end
 	},
 
+	-- Git pling
 	{ "NeogitOrg/neogit",
 		dependencies = {
-    			"nvim-lua/plenary.nvim",         -- required
-    			"sindrets/diffview.nvim",        -- optional - Diff integration
-    			--"nvim-telescope/telescope.nvim", -- optional
-  		},
-	}
+			"nvim-lua/plenary.nvim",         -- required
+			"sindrets/diffview.nvim",        -- optional - Diff integration
+		},
+	},
+
 }
