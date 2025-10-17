@@ -4,14 +4,14 @@ vim.g.maplocalleader = " "
 vim.g.have_nerd_font = true
 vim.opt.termguicolors = true
 
-vim.opt.ruler = false -- show position of cursor
-vim.opt.laststatus = 0 -- status line, 0 - don't show 
+vim.opt.ruler = true       -- show position of cursor
+vim.opt.laststatus = 0     -- status line, 0 - don't show
 vim.opt.sidescrolloff = 10 -- keep 10 lines at left/right when scrolling
-vim.opt.scrolloff = 10 -- keep 10 lines at top/bottom when scrolling
-vim.opt.wrap = false -- do not wrap long lines
+vim.opt.scrolloff = 10     -- keep 10 lines at top/bottom when scrolling
+vim.opt.wrap = false       -- do not wrap long lines
 
-vim.opt.list = true -- show blanks
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' } -- show blanks as 
+vim.opt.list = true        -- show blanks
+vim.opt.listchars = { tab = '» ', trail = '.', nbsp = '␣' } -- show blanks as
 
 vim.opt.tabstop = 8
 vim.opt.shiftwidth = 8
