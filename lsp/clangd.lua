@@ -1,6 +1,5 @@
--- clangd configs
 return {
-	cmd = { 'clangd' },
+	cmd = { 'clangd', '--clang-tidy' },
 	filetypes = {'c', 'cpp', 'objc', 'objcpp', 'cuda'},
 	root_makers = { '.clangd',
 			'.clang-tidy',

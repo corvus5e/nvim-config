@@ -66,4 +66,5 @@ require("config.lazy")
 
 -- Do things after plugins are loaded
 vim.lsp.enable('clangd')
+vim.lsp.enable('pyright')
 

@@ -2,3 +2,4 @@
  - clangd (https://clangd.llvm.org/installation)
  - ripgrep (https://github.com/BurntSushi/ripgrep)
  - fd (https://github.com/sharkdp/fd?tab=readme-ov-file#installation)
+ - pyright (https://microsoft.github.io/pyright/#/installation)
