@@ -3,3 +3,4 @@
  - ripgrep (https://github.com/BurntSushi/ripgrep)
  - fd (https://github.com/sharkdp/fd?tab=readme-ov-file#installation)
  - pyright (https://microsoft.github.io/pyright/#/installation)
+ - llvm-21 : lldb-dap, lldb (for Debina/Ubintu: https://apt.llvm.org/)
