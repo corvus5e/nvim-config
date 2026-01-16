@@ -36,7 +36,21 @@ return {
 					gitsigns.nav_hunk('prev')
 				end
 			end)
-	
+
+			local base_is_head1 = false
+			local function toggle_base_prev_commit()
+			  if base_is_head1 then
+			    gitsigns.change_base(nil, true) -- Reset to default (index)
+			    print("Gitsigns: Base reset to Index")
+			  else
+			    gitsigns.change_base('HEAD~1', true) -- Set to previous commit
+			    print("Gitsigns: Base set to HEAD~1")
+			  end
+			  base_is_head1 = not base_is_head1
+			end
+
+			-- Map it to a key
+			vim.keymap.set('n', '<leader>hb', toggle_base_prev_commit, { desc = "Toggle signs against prev commit" })
 		end
 	},
 }
