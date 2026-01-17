@@ -37,20 +37,32 @@ return {
 				end
 			end)
 
-			local base_is_head1 = false
-			local function toggle_base_prev_commit()
-			  if base_is_head1 then
-			    gitsigns.change_base(nil, true) -- Reset to default (index)
-			    print("Gitsigns: Base reset to Index")
-			  else
-			    gitsigns.change_base('HEAD~1', true) -- Set to previous commit
-			    print("Gitsigns: Base set to HEAD~1")
-			  end
-			  base_is_head1 = not base_is_head1
-			end
+			vim.api.nvim_create_user_command('GitsignChangeBase', function(opts)
+				local gs = package.loaded.gitsigns
+				if not gs then
+					vim.notify("Gitsigns not loaded", vim.log.levels.ERROR)
+			    		return
+			    	end
+			
+				local arg = tonumber(opts.args)
+				local base
 
-			-- Map it to a key
-			vim.keymap.set('n', '<leader>hb', toggle_base_prev_commit, { desc = "Toggle signs against prev commit" })
+				-- Check if arg exists and is greater than 0
+				if arg and arg > 0 then
+					base = "HEAD~" .. arg
+				else
+					-- Default to index (nil usually points to index in gitsigns)
+					base = nil 
+				end
+		
+				gs.change_base(base, true)
+		
+				local message = base and ("Base changed to " .. base) or "Base changed to index"
+				vim.notify(message, vim.log.levels.INFO)
+			end, {
+				nargs = '?', -- Allows 0 or 1 argument
+				desc = 'Change gitsigns base to HEAD~n or index'
+			})
 		end
 	},
 }
