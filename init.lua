@@ -29,6 +29,10 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 vim.keymap.set('n', '<leader>ts', '<cmd>set spell! spelllang=en_us<CR>', {desc = 'Spell on/off'})
+vim.keymap.set('n', '*', function()
+	local cword = vim.fn.expand('<cword>')
+	return ':%s/' .. cword .. '//gn<CR>``'
+end, { expr = true, noremap = true, desc = 'Count occurrences of word under cursor' })
 
 -- LSP key mappings
 vim.api.nvim_create_autocmd('LspAttach', {
