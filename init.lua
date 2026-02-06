@@ -89,6 +89,11 @@ local function open_clean_loclist()
   })
 
   vim.cmd("lopen")
+  -- Apply custom colors to the [E] and [W] prefixes
+  vim.fn.matchadd("DiagnosticError", "^\\[E\\].*")
+  vim.fn.matchadd("DiagnosticWarn",  "^\\[W\\].*")
+  vim.fn.matchadd("DiagnosticInfo",  "^\\[I\\].*")
+  vim.fn.matchadd("DiagnosticHint",  "^\\[H\\].*")
 end
 
 -- LSP key mappings
