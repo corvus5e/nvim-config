@@ -34,6 +34,63 @@ vim.keymap.set('n', '*', function()
 	return ':%s/' .. cword .. '//gn<CR>``'
 end, { expr = true, noremap = true, desc = 'Count occurrences of word under cursor' })
 
+vim.keymap.set('n', '#', function()
+	local cword = vim.fn.expand('<cword>')
+	return '/\\<' .. cword .. '\\><CR>'
+end, { expr = true, noremap = true, desc = 'Count exact occurrences of word under cursor' })
+
+-- Customize diagnostics window, Vibe-coded wiht Gemini
+local function open_clean_loclist()
+  local diagnostics = vim.diagnostic.get(0)
+  local items = {}
+  
+  local severity_map = {
+    [vim.diagnostic.severity.ERROR] = "[E]",
+    [vim.diagnostic.severity.WARN]  = "[W]",
+    [vim.diagnostic.severity.INFO]  = "[I]",
+    [vim.diagnostic.severity.HINT]  = "[H]",
+  }
+
+  for _, d in ipairs(diagnostics) do
+    local label = severity_map[d.severity] or "[?]"
+    table.insert(items, {
+      bufnr = d.bufnr,
+      lnum = d.lnum + 1,
+      col = d.col + 1,
+      text = string.format("%s%d: %s", label, d.lnum + 1, d.message),
+      type = label:sub(2,2),
+    })
+  end
+
+  -- We define the formatter separately to handle the 'nil' edge case
+  local function clean_formatter(info)
+    -- Fetch the specific list being rendered
+    local list = vim.fn.getloclist(0, { id = info.id, items = 1 })
+    if not list.items or #list.items == 0 then return {} end
+    
+    local res = {}
+    for i = info.start_idx, info.end_idx do
+      -- Added a safety check here to prevent the 'nil' error
+      local item = list.items[i]
+      if item then
+        table.insert(res, item.text)
+      else
+        table.insert(res, "")
+      end
+    end
+    return res
+  end
+
+  -- Pass the function directly
+  vim.fn.setloclist(0, {}, ' ', {
+    title = "Buffer Diagnostics",
+    items = items,
+    quickfixtextfunc = clean_formatter
+  })
+
+  vim.cmd("lopen")
+end
+
 -- LSP key mappings
 vim.api.nvim_create_autocmd('LspAttach', {
 	group = vim.api.nvim_create_augroup('my.lsp', {}),
@@ -43,7 +100,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, { desc = '[C]ode [F]ormat' })
 		vim.keymap.set('v', '<leader>cf', vim.lsp.buf.format, { desc = '[C]ode [F]ormat' })
 		vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = '[R]e[N]ame' })
-		vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostic list' })
+		vim.keymap.set('n', '<leader>D', open_clean_loclist, { desc = 'Open [D]iagnostic list' })
+		--vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostic list' })
 		vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float,{ desc = 'Open [d]iagnostic under cursor' })
 		vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = '[G]o to [D]eclaration' })
 		vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = '[G]o to [D]eclaration' })
