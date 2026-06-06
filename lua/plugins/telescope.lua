@@ -2,11 +2,14 @@ return {
 	'nvim-telescope/telescope.nvim', tag = '0.1.8',
 
 	dependencies = { 'nvim-lua/plenary.nvim',
-	{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }},
+		{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+		{ 'nvim-telescope/telescope-ui-select.nvim' }
+	},
 
 	config = function()
 		-- Enable Telescope extensions if they are installed
 		pcall(require('telescope').load_extension, 'fzf')
+		pcall(require('telescope').load_extension, 'ui-select')
 
 		local actions = require('telescope.actions')
 
@@ -20,6 +23,15 @@ return {
 				cache_picker = {
       					num_pickers = 5, -- Keep the last 5 pickers in memory
     				},
+			},
+			extensions = {
+				["ui-select"] = {
+					require("telescope.themes").get_dropdown {
+						-- You can use your global full-screen template or force specific layouts
+						layout_strategy = 'horizontal',
+						layout_config = { height = 0.99, width = 0.99 },
+					}
+				}
 			},
 			
 			-- Map <C-d> to delete buffer without closing telescope
