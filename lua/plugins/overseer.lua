@@ -53,8 +53,8 @@ return {
         })
 
         -- Streamlined keymap (removed the redundant leading colon)
-        vim.keymap.set('n', '<leader>or', '<cmd>OverseerRun<cr>', { desc = '[O]verseer [R]un' })
-        vim.keymap.set('n', '<leader>ot', '<cmd>OverseerToggle<cr>', { desc = '[O]verseer [T]oggle' })
-        vim.keymap.set('n', '<leader>b', '<cmd>OverseerRun Build<cr>', { desc = 'Overseer Run [B]uild task' })
+        vim.keymap.set('n', '<leader>tr', '<cmd>OverseerRun<cr>', { desc = 'Overseer [T]asks [R]un' })
+        vim.keymap.set('n', '<leader>tt', '<cmd>OverseerToggle<cr>', { desc = 'Overseer [T]asks [T]oggle' })
+        vim.keymap.set('n', '<leader>tb', '<cmd>OverseerRun Build<cr>', { desc = 'Overseer [T]asks Run [B]uild task' })
     end
 }
