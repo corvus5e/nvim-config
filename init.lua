@@ -3,6 +3,7 @@ vim.g.maplocalleader = " "
 
 vim.g.have_nerd_font = true
 vim.opt.termguicolors = true
+-- vim.opt.clipboard = "unnamedplus" -- sync yank/delete with system clipboard
 
 vim.opt.ruler = true       -- show position of cursor
 vim.opt.laststatus = 0     -- status line, 0 - don't show
@@ -43,7 +44,7 @@ end, { expr = true, noremap = true, desc = 'Count exact occurrences of word unde
 local function open_clean_loclist()
   local diagnostics = vim.diagnostic.get(0)
   local items = {}
-  
+
   local severity_map = {
     [vim.diagnostic.severity.ERROR] = "[E]",
     [vim.diagnostic.severity.WARN]  = "[W]",
@@ -67,7 +68,7 @@ local function open_clean_loclist()
     -- Fetch the specific list being rendered
     local list = vim.fn.getloclist(0, { id = info.id, items = 1 })
     if not list.items or #list.items == 0 then return {} end
-    
+
     local res = {}
     for i = info.start_idx, info.end_idx do
       -- Added a safety check here to prevent the 'nil' error
@@ -103,7 +104,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		vim.keymap.set('i', '<C-Space>','<C-x><C-o>', { desc = 'Trigger completion' })
 		vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = '[C]ode [A]ction' })
 		vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, { desc = '[C]ode [F]ormat' })
-		vim.keymap.set('v', '<leader>cf', vim.lsp.buf.format, { desc = '[C]ode [F]ormat' })
 		vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = '[R]e[N]ame' })
 		vim.keymap.set('n', '<leader>D', open_clean_loclist, { desc = 'Open [D]iagnostic list' })
 		--vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostic list' })
@@ -114,6 +114,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		vim.keymap.set('n', 'gT', vim.lsp.buf.type_definition, { desc = '[G]o to [T]ype definition' })
 		vim.keymap.set('n', 'grr', vim.lsp.buf.references, { desc = '[G]o to [R]efe[R]ences' })
 		vim.keymap.set('n', 'K',  vim.lsp.buf.hover, { desc = '[G]o to [R]efe[R]ences' })
+
+		vim.keymap.set('n', '<leader>td', function()
+		    local current_setting = vim.diagnostic.config().signs
+		    vim.diagnostic.config({ signs = not current_setting })
+		    print("Diagnostic signs: " .. (current_setting and "OFF" or "ON"))
+		end, { desc = "Toggle Diagnostic Signs" })
 	end
 })
 
@@ -133,5 +139,4 @@ require("config.lazy")
 
 -- Do things after plugins are loaded
 vim.lsp.enable('clangd')
-vim.lsp.enable('pyright')
 

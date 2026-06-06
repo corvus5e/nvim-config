@@ -14,5 +14,7 @@ return {
 				kind = "split"
 			}
 		}
+
+		vim.keymap.set('n', '<leader>ng', '<cmd>:Neogit<CR>', {desc = 'open file explore as left split'})
 	end
 }
