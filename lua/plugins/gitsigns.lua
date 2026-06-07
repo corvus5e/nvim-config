@@ -36,6 +36,7 @@ return {
 					gitsigns.nav_hunk('prev')
 				end
 			end)
+			map('n', '<leader>gp', gitsigns.preview_hunk_inline)
 
 			vim.api.nvim_create_user_command('GitsignChangeBase', function(opts)
 				local gs = package.loaded.gitsigns
@@ -64,5 +65,5 @@ return {
 				desc = 'Change gitsigns base to HEAD~n or index'
 			})
 		end
-	},
+	}
 }
