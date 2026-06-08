@@ -104,6 +104,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		vim.keymap.set('i', '<C-Space>','<C-x><C-o>', { desc = 'Trigger completion' })
 		vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = '[C]ode [A]ction' })
 		vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, { desc = '[C]ode [F]ormat' })
+		vim.keymap.set('v', '<leader>cf', vim.lsp.buf.format, { desc = '[C]ode [F]ormat' })
 		vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = '[R]e[N]ame' })
 		vim.keymap.set('n', '<leader>D', open_clean_loclist, { desc = 'Open [D]iagnostic list' })
 		--vim.keymap.set('n', '<leader>D', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostic list' })
