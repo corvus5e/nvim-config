@@ -5,6 +5,9 @@ vim.g.have_nerd_font = true
 vim.opt.termguicolors = true
 -- vim.opt.clipboard = "unnamedplus" -- sync yank/delete with system clipboard
 
+vim.opt.number = false
+vim.opt.relativenumber = false
+
 vim.opt.ruler = true       -- show position of cursor
 vim.opt.laststatus = 0     -- status line, 0 - don't show
 vim.opt.sidescrolloff = 10 -- keep 10 lines at left/right when scrolling

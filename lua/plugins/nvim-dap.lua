@@ -13,8 +13,8 @@ return {
 		vim.fn.sign_define('DapBreakpointRejected', {text='', texthl='DiagnosticHint', linehl='', numhl='DiagnosticHint'})
 
 		--vim.keymap.set('n', '<F5>', ':DapNew<CR>', { silent = true, desc = 'Dap New' })
-		vim.keymap.set('n', '<leader>tb', ':DapToggleBreakpoint<CR>', { silent = true, desc = '[T]oggle [B]reakpoint' })
-		vim.keymap.set('n', '<leader>tv', ':DapViewToggle<CR>', { silent = true, desc = '[T]oggle [V]iew' })
+		vim.keymap.set('n', '<leader>db', ':DapToggleBreakpoint<CR>', { silent = true, desc = '[T]oggle [B]reakpoint' })
+		vim.keymap.set('n', '<leader>dv', ':DapViewToggle<CR>', { silent = true, desc = '[T]oggle [V]iew' })
 
 		-- Let's give our listener a clear name
 		local listener_id = "user_keymaps"
