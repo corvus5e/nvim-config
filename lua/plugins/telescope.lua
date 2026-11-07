@@ -36,6 +36,12 @@ return {
 			
 			-- Map <C-d> to delete buffer without closing telescope
 			pickers = {
+				live_grep = {
+					path_display = { "tail" },
+				},
+				grep_string = {
+					path_display = { "tail" },
+				},
 				buffers = {
 					sort_mru = true,
 					mappings = {
