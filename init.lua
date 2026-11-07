@@ -23,7 +23,7 @@ vim.opt.shiftwidth = 8
 
 -- Key mappings
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', {desc = 'stop highlight search results on <Esc>'})
-vim.keymap.set('n', '<C-n>', '<cmd>:Explore<CR>', {desc = 'open file explore as left split'})
+vim.keymap.set('n', '<C-n>', '<cmd>:Lexplore<CR>', {desc = 'open file explore as left split'})
 vim.keymap.set('n', '<Tab>', '<cmd>:tabnext<CR>', {desc = 'go to next tab'})
 vim.keymap.set('n', '<S-Tab>', '<cmd>:tabprevious<CR>', { desc = 'go to previous tab'})
 vim.keymap.set('n', '<C-t>', '<cmd>:tabnew<CR><BAR><cmd>:term<CR>', { desc = 'open terminal in new tab'})
